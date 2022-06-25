@@ -70,7 +70,7 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ConcertResponse>> getAllTasks() {
+    public ResponseEntity<List<TaskResponse>> getAllTasks() {
         List<Task> tasks = taskService.findAllTasks();
         if(tasks == null || tasks.isEmpty()) {
             return ResponseEntity.noContent().build();
