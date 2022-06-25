@@ -3,6 +3,11 @@ package com.kenzie.appserver.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+import javax.validation.constraints.Min;
+>>>>>>> added taskresponse and taskupdaterequest
 
 import javax.validation.constraints.NotEmpty;
 
@@ -21,14 +26,19 @@ public class TaskUpdateRequest {
     @JsonProperty("dateAdded")
     private String dateAdded;
 
+
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
 
     @JsonProperty("completionDate")
     private String completionDate;
 
     @JsonProperty("completed")
 
+
     private boolean completed;
+
+
 
 
 
