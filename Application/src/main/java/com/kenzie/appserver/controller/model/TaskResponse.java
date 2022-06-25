@@ -12,6 +12,15 @@ public class TaskResponse {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("date")
+    private String dateAdded;
+
+    @JsonProperty("completionDate")
+    private String completionDate;
+
+    @JsonProperty("completed")
+    private Boolean completed;
+
     public String getId() {
         return id;
     }
@@ -26,5 +35,29 @@ public class TaskResponse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(String dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public String getCompletionDate() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(String completionDate) {
+        this.completionDate = completionDate;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }
