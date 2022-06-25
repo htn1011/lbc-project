@@ -1,6 +1,6 @@
 package com.kenzie.appserver.service;
 
-import com.kenzie.appserver.repositories.model.ExampleRecord;
+import com.kenzie.appserver.repositories.model.TaskRecord;
 import com.kenzie.appserver.repositories.ExampleRepository;
 import com.kenzie.appserver.service.model.Example;
 
@@ -24,7 +24,7 @@ public class ExampleService {
     }
 
     public Example addNewExample(Example example) {
-        ExampleRecord exampleRecord = new ExampleRecord();
+        TaskRecord exampleRecord = new TaskRecord();
         exampleRecord.setId(example.getId());
         exampleRecord.setName(example.getName());
         exampleRepository.save(exampleRecord);

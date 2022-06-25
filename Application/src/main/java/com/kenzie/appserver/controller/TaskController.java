@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 import static java.util.UUID.randomUUID;
 
@@ -60,6 +61,25 @@ public class TaskController {
         Task task = new Task(taskUpdateRequest.getId(),
                 taskUpdateRequest.getName(),
                 taskUpdateRequest.getDateAdded(),
-                taskUpdateRequest)
+                taskUpdateRequest.getCompleted());
+        taskService.updateTask(task);
+
+        TaskResponse taskResponse = createTaskResponse(task);
+
+        return ResponseEntity.ok(taskResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ConcertResponse>> getAllTasks() {
+        List<Task> tasks = taskService.findAllTasks();
+        if(tasks == null || tasks.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        List<TaskResponse> response = new ArrayList<>();
+        for(Task task: tasks) {
+            response.add(this.createTaskResponse(task));
+        }
+
+        return ResponseEntity.ok(response);
     }
 }

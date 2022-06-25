@@ -1,7 +1,7 @@
 package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.ExampleRepository;
-import com.kenzie.appserver.repositories.model.ExampleRecord;
+import com.kenzie.appserver.repositories.model.TaskRecord;
 import com.kenzie.appserver.service.model.Example;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ public class ExampleServiceTest {
         // GIVEN
         String id = randomUUID().toString();
 
-        ExampleRecord record = new ExampleRecord();
+        TaskRecord record = new TaskRecord();
         record.setId(id);
         record.setName("concertname");
 
