@@ -14,7 +14,6 @@ public class TaskRecord {
     private String name;
     private String dateAdded;
     private String completionDate;
-    private List<String> suppliesList;
     private boolean completed;
 
     @DynamoDBHashKey(attributeName = "Id")
@@ -27,18 +26,18 @@ public class TaskRecord {
         return name;
     }
 
-    @DynamoDBAttribute(attributeName = "DateAdded")
+    @DynamoDBAttribute(attributeName = "CompletionDate")
     public String getCompletionDate() {
         return completionDate;
     }
 
-    @DynamoDBAttribute(attributeName = "SuppliesList")
-    public List<String> getSuppliesList() {
-        return suppliesList;
+    @DynamoDBAttribute(attributeName = "DateAdded")
+    public String getDateAdded() {
+        return dateAdded;
     }
 
     @DynamoDBAttribute(attributeName = "isCompleted")
-    public boolean isCompleted() {
+    public boolean getCompleted() {
         return completed;
     }
 
@@ -54,8 +53,8 @@ public class TaskRecord {
         this.dateAdded = dateAdded;
     }
 
-    public void setSuppliesList(List<String> suppliesList) {
-        this.suppliesList = suppliesList;
+    public void setCompletionDate(String completionDate) {
+        this.completionDate = completionDate;
     }
 
     public void setCompleted(boolean completed) {

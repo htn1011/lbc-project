@@ -1,9 +1,10 @@
 package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.TaskRepository;
-import com.kenzie.appserver.repositories.model.ExampleRecord;
 
+import com.kenzie.appserver.repositories.model.TaskRecord;
 import com.kenzie.appserver.service.model.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 public class TaskService {
     private TaskRepository taskRepository;
 
+    @Autowired
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
@@ -20,31 +22,29 @@ public class TaskService {
     public List<Task> findAllTasks() {
         List<Task> tasks = new ArrayList<>();
 
-        Iterable<TaskRecord> concertIterator = taskRepository.findAll();
-        for(TaskRecord record : concertIterator) {
+        Iterable<TaskRecord> taskIterator = taskRepository.findAll();
+        for(TaskRecord record : taskIterator) {
             tasks.add(new Task(record.getId(),
                     record.getName(),
                     record.getDateAdded(),
                     record.getCompletionDate(),
-                    record.getSuppliesList(),
                     record.getCompleted()));
         }
 
         return tasks;
     }
 
-    public Task findById(String id) {
-        Task taskFromBackend = taskRepository
-                .findById(id)
+    public Task findByTaskId(String taskId) {
+        Task taskFromBackendService = taskRepository
+                .findById(taskId)
                 .map(task -> new Task(task.getId(),
                         task.getName(),
                         task.getDateAdded(),
                         task.getCompletionDate(),
-                        task.getSuppliesList(),
                         task.getCompleted()))
                 .orElse(null);
 
-        return taskFromBackend;
+        return taskFromBackendService;
     }
 
     public Task addNewTask(Task task) {
@@ -53,7 +53,6 @@ public class TaskService {
         taskRecord.setName(task.getName());
         taskRecord.setDateAdded(task.getDateAdded());
         taskRecord.setCompletionDate(task.getCompletionDate());
-        taskRecord.setSuppliesList(task.getSuppliesList());
         taskRecord.setCompleted(task.getCompleted());
         taskRepository.save(taskRecord);
         return task;
@@ -66,7 +65,6 @@ public class TaskService {
             taskRecord.setName(task.getName());
             taskRecord.setDateAdded(task.getDateAdded());
             taskRecord.setCompletionDate(task.getCompletionDate());
-            taskRecord.setSuppliesList(task.getSuppliesList());
             taskRecord.setCompleted(task.getCompleted());
             taskRepository.save(taskRecord);
         }
