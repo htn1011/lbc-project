@@ -12,9 +12,13 @@ public class TaskResponse {
     @JsonProperty("name")
     private String name;
 
+<<<<<<< HEAD
 
     @JsonProperty("dateAdded")
 
+=======
+    @JsonProperty("dateAdded")
+>>>>>>> for team
     private String dateAdded;
 
     @JsonProperty("completionDate")
