@@ -31,48 +31,16 @@ public class TaskUpdateRequest {
     @JsonProperty("name")
     private String name;
 
-
-
-
-
-
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty("dateAdded")
     private String dateAdded;
 
-
-
-
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-
-
-
-
-
-
     @JsonProperty("completionDate")
     private String completionDate;
 
     @JsonProperty("completed")
-
-
-
-
-
-
     private boolean completed;
-
-
-
-
-
-
-
-   
-
-
-
-
 
     public String getId() {
         return id;
@@ -106,13 +74,7 @@ public class TaskUpdateRequest {
         this.completionDate = completionDate;
     }
 
-
-
-
-
     public boolean isCompleted() {
-
-
         return completed;
     }
 
