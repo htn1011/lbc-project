@@ -1,6 +1,8 @@
 package com.kenzie.appserver.controller.model;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 import javax.validation.constraints.NotEmpty;
 
@@ -14,14 +16,20 @@ public class TaskUpdateRequest {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("date")
+
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonProperty("dateAdded")
     private String dateAdded;
+
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 
     @JsonProperty("completionDate")
     private String completionDate;
 
     @JsonProperty("completed")
+
     private boolean completed;
+
 
 
     public String getId() {
@@ -56,6 +64,7 @@ public class TaskUpdateRequest {
         this.completionDate = completionDate;
     }
 
+
     public boolean isCompleted() {
         return completed;
     }
@@ -64,3 +73,4 @@ public class TaskUpdateRequest {
         this.completed = completed;
     }
 }
+

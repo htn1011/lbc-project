@@ -14,11 +14,8 @@ public class TaskCreateRequest {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("date")
+    @JsonProperty("dateAdded")
     private String dateAdded;
-
-    public TaskCreateRequest() {
-    }
 
     public String getId() {
         return id;
