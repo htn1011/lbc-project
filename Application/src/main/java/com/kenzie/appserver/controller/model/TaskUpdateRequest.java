@@ -3,10 +3,18 @@ package com.kenzie.appserver.controller.model;
 
 
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.LocalDate;
+import javax.validation.constraints.Min;
 
 
 import javax.validation.constraints.NotEmpty;
@@ -46,11 +54,16 @@ public class TaskUpdateRequest {
 
 
 
+
     private boolean completed;
 
 
 
 
+
+
+
+   
 
 
 
@@ -90,7 +103,9 @@ public class TaskUpdateRequest {
 
 
 
+
     public boolean isCompleted() {
+
 
         return completed;
     }
