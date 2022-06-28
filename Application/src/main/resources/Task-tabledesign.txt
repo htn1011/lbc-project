@@ -1,0 +1,6 @@
+// Task
+id // hash key, string
+name // string
+dateAdded // string
+completionDate // string
+completed // boolean
