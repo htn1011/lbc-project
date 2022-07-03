@@ -1,16 +1,21 @@
 package com.kenzie.appserver.controller.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ExampleResponse {
+import javax.validation.constraints.NotEmpty;
 
+public class TaskCreateRequest {
+    @NotEmpty
     @JsonProperty("id")
     private String id;
 
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("dateAdded")
+    private String dateAdded;
 
     public String getId() {
         return id;
@@ -26,5 +31,13 @@ public class ExampleResponse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(String dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }
