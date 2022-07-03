@@ -6,6 +6,9 @@ import com.kenzie.appserver.service.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import net.andreinc.mockneat.MockNeat;
+
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -14,7 +17,6 @@ import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.*;
-
 public class PutAndGetAllTest {
     private TaskRepository taskRepository;
     private TaskService taskService;
@@ -77,13 +79,23 @@ public class PutAndGetAllTest {
     @Test
     void update_task() {
         //GIVEN
+        String id = randomUUID().toString();
+        Task task = new Task(id, "taskname", "dateadded", "completiondate", false);
 
-        Task task = new Task(randomUUID().toString(), "task1", "01/01/2022", "01/01/2022", true);
 
         //WHEN
+        when(taskRepository.findById(id)).thenReturn(any());
+
+
 
         //THEN
         taskService.updateTask(task);
-        Assertions.assertEquals(task.getCompleted(), true);
+        Assertions.assertNotNull(task, "The task record is returned");
+        Assertions.assertEquals(task.getId(), task.getId(), "The task id matches");
+        Assertions.assertEquals(task.getName(), task.getName(), "The task name matches");
+        Assertions.assertEquals(task.getDateAdded(), task.getDateAdded(), "The date added matches");
+        Assertions.assertEquals(task.getCompletionDate(), task.getCompletionDate(), "The task completion date matches");
+        Assertions.assertEquals(task.getCompleted(), task.getCompleted(), "The task completed flag matches");
+
     }
 }
