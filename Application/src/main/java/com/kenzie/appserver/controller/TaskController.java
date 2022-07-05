@@ -57,8 +57,8 @@ public class TaskController {
     public ResponseEntity<TaskResponse> updateTask(@RequestBody TaskUpdateRequest taskUpdateRequest) {
         Task task = new Task(taskUpdateRequest.getId(),
                 taskUpdateRequest.getName(),
-                randomUUID().toString(),
-                randomUUID().toString(),
+                taskUpdateRequest.getDateAdded(),
+                taskUpdateRequest.getCompletionDate(),
                 taskUpdateRequest.getCompleted());
         taskService.updateTask(task);
 

@@ -77,7 +77,7 @@ public class TaskServiceTest {
      **/
 
     @Test
-    void addNewConcert() {
+    void addNewTask() {
         // GIVEN
         String taskId = randomUUID().toString();
 
@@ -102,7 +102,7 @@ public class TaskServiceTest {
         Assertions.assertEquals(record.getCompletionDate(), task.getCompletionDate(), "The date matches");
         Assertions.assertEquals(record.getCompleted(), task.getCompleted(), "The true or false matches");
     }
-    
+
     @Test
     void findAllTasks_two_tasks() {
         // GIVEN
@@ -152,7 +152,7 @@ public class TaskServiceTest {
     }
 
     @Test
-    void updateTask() {
+    void updateTaskTest() {
         //GIVEN
         String id = randomUUID().toString();
 
@@ -183,8 +183,7 @@ public class TaskServiceTest {
         Assertions.assertEquals(storedRecord.getId(), task.getId(), "The task id matches");
         Assertions.assertEquals(storedRecord.getName(), task.getName(), "The task name matches");
         Assertions.assertEquals(storedRecord.getDateAdded(), task.getDateAdded(), "The date added matches");
-        Assertions.assertEquals(storedRecord.getCompletionDate(), task.getCompletionDate(), "The task completion                                                                                                                         date matches");
+        Assertions.assertEquals(storedRecord.getCompletionDate(), task.getCompletionDate(), "The task completion date matches");
         Assertions.assertEquals(storedRecord.getCompleted(), task.getCompleted(), "The task completed flag matches");
-
     }
 }
