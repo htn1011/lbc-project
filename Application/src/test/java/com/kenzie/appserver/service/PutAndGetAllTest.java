@@ -6,20 +6,26 @@ import com.kenzie.appserver.service.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import net.andreinc.mockneat.MockNeat;
 
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
+import org.mockito.ArgumentCaptor;
+import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectWriter;
 
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.*;
 public class PutAndGetAllTest {
     private TaskRepository taskRepository;
     private TaskService taskService;
+
+    private MockMvc mockMvc;
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectWriter objectWriter = objectMapper.writer();
 
     @BeforeEach
     void setup() {
@@ -80,22 +86,30 @@ public class PutAndGetAllTest {
     void update_task() {
         //GIVEN
         String id = randomUUID().toString();
-        Task task = new Task(id, "taskname", "dateadded", "completiondate", false);
+        Task task = new Task(id, "taskname", "dateadded", "completiondate", true);
 
+        TaskRecord taskRecord = new TaskRecord();
+        taskRecord.setId(id);
+        taskRecord.setName("taskname");
+        taskRecord.setDateAdded("dateadded");
+        taskRecord.setCompletionDate("completiondate");
+        taskRecord.setCompleted(false);
+
+        ArgumentCaptor<TaskRecord> recordArgumentCaptor = ArgumentCaptor.forClass(TaskRecord.class);
 
         //WHEN
-        when(taskRepository.findById(id)).thenReturn(any());
-
-
+        taskService.updateTask(task);
 
         //THEN
-        taskService.updateTask(task);
-        Assertions.assertNotNull(task, "The task record is returned");
-        Assertions.assertEquals(task.getId(), task.getId(), "The task id matches");
-        Assertions.assertEquals(task.getName(), task.getName(), "The task name matches");
-        Assertions.assertEquals(task.getDateAdded(), task.getDateAdded(), "The date added matches");
-        Assertions.assertEquals(task.getCompletionDate(), task.getCompletionDate(), "The task completion date matches");
-        Assertions.assertEquals(task.getCompleted(), task.getCompleted(), "The task completed flag matches");
+        verify(taskRepository).save(recordArgumentCaptor.capture());
+        TaskRecord storedRecord = recordArgumentCaptor.getValue();
+
+        Assertions.assertNotNull(storedRecord, "The task record is returned");
+        Assertions.assertEquals(storedRecord.getId(), task.getId(), "The task id matches");
+        Assertions.assertEquals(storedRecord.getName(), task.getName(), "The task name matches");
+        Assertions.assertEquals(storedRecord.getDateAdded(), task.getDateAdded(), "The date added matches");
+        Assertions.assertEquals(storedRecord.getCompletionDate(), task.getCompletionDate(), "The task completion                                                                                                                         date matches");
+        Assertions.assertEquals(storedRecord.getCompleted(), task.getCompleted(), "The task completed flag matches");
 
     }
 }
