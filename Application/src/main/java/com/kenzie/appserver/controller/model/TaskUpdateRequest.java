@@ -26,7 +26,7 @@ public class TaskUpdateRequest {
     private String completionDate;
 
     @JsonProperty("completed")
-    private boolean completed;
+    private Boolean completed;
 
     public String getId() {
         return id;
@@ -60,15 +60,11 @@ public class TaskUpdateRequest {
         this.completionDate = completionDate;
     }
 
-    public boolean getCompleted() {
+    public Boolean getCompleted() {
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
 }
-
-
-
-
