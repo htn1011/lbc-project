@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mockito.ArgumentCaptor;
-import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectWriter;
 
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.*;
@@ -22,17 +19,11 @@ public class PutAndGetAllTest {
     private TaskRepository taskRepository;
     private TaskService taskService;
 
-    private MockMvc mockMvc;
-
-    ObjectMapper objectMapper = new ObjectMapper();
-    ObjectWriter objectWriter = objectMapper.writer();
-
     @BeforeEach
     void setup() {
         taskRepository = mock(TaskRepository.class);
         taskService = new TaskService(taskRepository);
     }
-
 
     @Test
     void findAllTasks_two_tasks() {
@@ -83,10 +74,9 @@ public class PutAndGetAllTest {
     }
 
     @Test
-    void update_task() {
+    void updateTask() {
         //GIVEN
         String id = randomUUID().toString();
-        Task task = new Task(id, "taskname", "dateadded", "completiondate", true);
 
         TaskRecord taskRecord = new TaskRecord();
         taskRecord.setId(id);
@@ -94,6 +84,13 @@ public class PutAndGetAllTest {
         taskRecord.setDateAdded("dateadded");
         taskRecord.setCompletionDate("completiondate");
         taskRecord.setCompleted(false);
+
+        Task task = new Task(
+                taskRecord.getId(),
+                taskRecord.getName(),
+                taskRecord.getDateAdded(),
+                taskRecord.getCompletionDate(),
+                taskRecord.getCompleted());
 
         ArgumentCaptor<TaskRecord> recordArgumentCaptor = ArgumentCaptor.forClass(TaskRecord.class);
 

@@ -59,7 +59,7 @@ public class TaskController {
                 taskUpdateRequest.getName(),
                 randomUUID().toString(),
                 randomUUID().toString(),
-                taskUpdateRequest.isCompleted());
+                taskUpdateRequest.getCompleted());
         taskService.updateTask(task);
 
         TaskResponse taskResponse = createTaskResponse(task);

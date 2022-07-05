@@ -60,7 +60,7 @@ public class TaskUpdateRequest {
         this.completionDate = completionDate;
     }
 
-    public boolean isCompleted() {
+    public boolean getCompleted() {
         return completed;
     }
 

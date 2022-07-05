@@ -59,7 +59,6 @@ public class TaskService {
     }
 
     public void updateTask(Task task) {
-        if (taskRepository.existsById(task.getId())) {
             TaskRecord taskRecord = new TaskRecord();
             taskRecord.setId(task.getId());
             taskRecord.setName(task.getName());
@@ -67,7 +66,6 @@ public class TaskService {
             taskRecord.setCompletionDate(task.getCompletionDate());
             taskRecord.setCompleted(task.getCompleted());
             taskRepository.save(taskRecord);
-        }
     }
 
     public void deleteTask(String taskId) {
