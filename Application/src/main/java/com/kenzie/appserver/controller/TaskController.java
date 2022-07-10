@@ -86,9 +86,15 @@ public class TaskController {
         taskResponse.setId(task.getId());
         taskResponse.setName(task.getName());
         taskResponse.setDateAdded(task.getDateAdded());
-        taskResponse.setCompleted(task.getCompleted());
+        taskResponse.setCompletionDate(task.getCompletionDate());
         taskResponse.setCompleted(task.getCompleted());
         return taskResponse;
     }
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity deleteTaskById(@PathVariable("taskId") String taskId) {
+        taskService.deleteTask(taskId);
 
+        return ResponseEntity.noContent().build();
+
+    }
 }
