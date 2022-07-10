@@ -57,8 +57,8 @@ public class TaskController {
     public ResponseEntity<TaskResponse> updateTask(@RequestBody TaskUpdateRequest taskUpdateRequest) {
         Task task = new Task(taskUpdateRequest.getId(),
                 taskUpdateRequest.getName(),
-                randomUUID().toString(),
-                randomUUID().toString(),
+                taskUpdateRequest.getDateAdded(),
+                taskUpdateRequest.getCompletionDate(),
                 taskUpdateRequest.getCompleted());
         taskService.updateTask(task);
 
@@ -86,9 +86,15 @@ public class TaskController {
         taskResponse.setId(task.getId());
         taskResponse.setName(task.getName());
         taskResponse.setDateAdded(task.getDateAdded());
-        taskResponse.setCompleted(task.getCompleted());
+        taskResponse.setCompletionDate(task.getCompletionDate());
         taskResponse.setCompleted(task.getCompleted());
         return taskResponse;
     }
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity deleteTaskById(@PathVariable("taskId") String taskId) {
+        taskService.deleteTask(taskId);
 
+        return ResponseEntity.noContent().build();
+
+    }
 }
