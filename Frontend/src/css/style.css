@@ -54,10 +54,19 @@
 }
 
 .card {
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
-    margin: 20px;
-    padding: 10px 20px;
+    /*border: 1px solid #ccc;*/
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 5px;
+}
+
+.special-card {
+    background-color: rgba(245, 245, 245, 1);
+    /*opacity: .0;*/
+}
+
+.special-text {
+    color: black;
 }
 
 .validated-field:invalid {
