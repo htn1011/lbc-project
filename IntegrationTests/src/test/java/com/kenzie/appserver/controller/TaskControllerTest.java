@@ -36,7 +36,7 @@ public class TaskControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void getConcert_ConcertExists() throws Exception {
+    public void getTask_TaskExists() throws Exception {
         // GIVEN
         String id = UUID.randomUUID().toString();
         String name = mockNeat.strings().valStr();
@@ -151,7 +151,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void deleteConcert_DeleteSuccessful() throws Exception {
+    public void deleteTask_DeleteSuccessful() throws Exception {
         // GIVEN
         String id = UUID.randomUUID().toString();
         String name = mockNeat.strings().valStr();
