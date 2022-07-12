@@ -21,6 +21,12 @@
     padding: 0 20px;
 }
 
+.btn-primary {
+    color: #212520;
+    background-color: #7cc;
+    border-color: #5bc2c2;
+}
+
 .header_home {
     font-size: 36px;
     line-height: 40px;

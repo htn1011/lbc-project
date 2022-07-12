@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Task Manager</title>
 </head>
@@ -27,50 +27,48 @@
             <li class="nav-item">
                 <a class="nav-link" href="task.html">Task</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-            </li>
         </ul>
     </div>
 </nav>
-<div class="container-fluid">
+<div>
     <hr class="featured-divider">
-    <div class="row">
-        <div class="col">
-            <div class="card-body">
-                <h1 class="card-title">Manage Your Tasks</h1>
-                <h1 class="card-title">Be More Productive At Work</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="card" style="align-items: center;">
-                <div class="card-body">
-                    <h5 class="card-title">Add a Task</h5>
-                    <p class="card-text"></p>
-                    <a href="projects.html" class="btn btn-info">Add a Task</a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <form class="card-content" id="create-task">
+                <div class="form-group">
+                    <label for="taskInputName">Create Your Task</label>
+                    <input type="task" class="form-control" id="taskInputName" placeholder="Enter Task">
                 </div>
-            </div>
+                <button type="submit" class="btn" id="create-task-submit">Submit</button>
+            </form>
         </div>
-        <div class="col">
-            <div class="card" style="">
-                <div class="card-body">
-                    <h5 class="card-title">Edit a Task</h5>
-                    <p class="card-text">
-                    </p>
-                    <a href="projects.html" class="btn btn-info">Edit a Task</a>
-                </div>
+    </a>
+    <hr class="featured-divider">
+    <h2>Result:</h2>
+    <div class="list-group">
+        <hr class="featured-divider">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Task Name</h5>
+                <small class="text-muted">Date Created..</small>
+                <button type="submit" class="btn">Edit</button>
+                <button type="submit" class="btn">Delete</button>
             </div>
-        </div>
-        <div class="col">
-            <div class="card" style="">
-                <div class="card-body">
-                    <h5 class="card-title">Stay organized</h5>
-                    <p class="card-text"></p>
-                    <a href="projects.html" class="btn btn-info">Sort by Completion</a>
-                </div>
+        </a>
+        <hr class="featured-divider">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Task Name</h5>
+                <small class="text-muted">Date Created..</small>
+                <button type="submit" class="btn">Edit</button>
+                <button type="submit" class="btn">Delete</button>
             </div>
+        </a>
+        <hr class="featured-divider">
+
+        <div class="card" id="result">
+            <h2>Result:</h2>
+            <p id="result-info"></p>
         </div>
     </div>
 </div>

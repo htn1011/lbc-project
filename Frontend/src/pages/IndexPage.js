@@ -1,11 +1,11 @@
 import BaseClass from "../util/baseClass";
 import DataStore from "../util/DataStore";
-import ExampleClient from "../api/exampleClient";
+import IndexClient from "../api/indexClient";
 
 /**
  * Logic needed for the view playlist page of the website.
  */
-class ExamplePage extends BaseClass {
+class IndexPage extends BaseClass {
 
     constructor() {
         super();
@@ -18,8 +18,8 @@ class ExamplePage extends BaseClass {
      */
     async mount() {
         document.getElementById('get-by-id-form').addEventListener('submit', this.onGet);
-        document.getElementById('create-form').addEventListener('submit', this.onCreate);
-        this.client = new ExampleClient();
+        document.getElementById('create-task').addEventListener('submit', this.onCreate);
+        this.client = new IndexClient();
 
         this.dataStore.addChangeListener(this.renderExample)
     }
@@ -27,14 +27,14 @@ class ExamplePage extends BaseClass {
     // Render Methods --------------------------------------------------------------------------------------------------
 
     async renderExample() {
-        let resultArea = document.getElementById("result-info");
+        let resultArea = document.getElementById("create-task");
 
-        const example = this.dataStore.get("example");
+        const task = this.dataStore.get("task");
 
-        if (example) {
+        if (task) {
             resultArea.innerHTML = `
-                <div>ID: ${example.id}</div>
-                <div>Name: ${example.name}</div>
+                <div>ID: ${task.id}</div>
+                <div>Name: ${task.name}</div>
             `
         } else {
             resultArea.innerHTML = "No Item";
@@ -48,10 +48,10 @@ class ExamplePage extends BaseClass {
         event.preventDefault();
 
         let id = document.getElementById("id-field").value;
-        this.dataStore.set("example", null);
+        this.dataStore.set("task", null);
 
-        let result = await this.client.getExample(id, this.errorHandler);
-        this.dataStore.set("example", result);
+        let result = await this.client.getTask(id, this.errorHandler);
+        this.dataStore.set("task", result);
         if (result) {
             this.showMessage(`Got ${result.name}!`)
         } else {
@@ -62,15 +62,15 @@ class ExamplePage extends BaseClass {
     async onCreate(event) {
         // Prevent the page from refreshing on form submit
         event.preventDefault();
-        this.dataStore.set("example", null);
+        this.dataStore.set("task", null);
 
-        let name = document.getElementById("create-name-field").value;
+        let name = document.getElementById("taskInputName").value;
 
-        const createdExample = await this.client.createExample(name, this.errorHandler);
-        this.dataStore.set("example", createdExample);
+        const createdTask = await this.client.createTask(name, this.errorHandler);
+        this.dataStore.set("task", createdTask);
 
-        if (createdExample) {
-            this.showMessage(`Created ${createdExample.name}!`)
+        if (createdTask) {
+            this.showMessage(`Created ${createdTask.name}!`)
         } else {
             this.errorHandler("Error creating!  Try again...");
         }
@@ -81,7 +81,7 @@ class ExamplePage extends BaseClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const examplePage = new ExamplePage();
+    const examplePage = new IndexPage();
     examplePage.mount();
 };
 
