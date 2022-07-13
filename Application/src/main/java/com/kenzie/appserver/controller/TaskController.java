@@ -91,4 +91,10 @@ public class TaskController {
         return taskResponse;
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTaskById(@PathVariable("id") String id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

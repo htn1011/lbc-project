@@ -9,15 +9,16 @@ class IndexPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGet', 'onCreate', 'renderExample'], this);
+        this.bindClassMethods(['onCreate', 'onGet', 'renderExample', 'onDelete'], this);
         this.dataStore = new DataStore();
     }
 
     /**
-     * Once the page has loaded, set up the event handlers and fetch the concert list.
+     * Once the page has loaded, set up the event handlers and fetch the task list.
      */
     async mount() {
-        document.getElementById('get-by-id-form').addEventListener('submit', this.onGet);
+        // document.getElementById('get-by-id-form').addEventListener('submit', this.onGet);
+        console.log("In the mount")
         document.getElementById('create-task').addEventListener('submit', this.onCreate);
         this.client = new IndexClient();
 
@@ -27,18 +28,26 @@ class IndexPage extends BaseClass {
     // Render Methods --------------------------------------------------------------------------------------------------
 
     async renderExample() {
-        let resultArea = document.getElementById("create-task");
+        const allTasks = await this.client.getAllTasks(this.errorHandler);
 
-        const task = this.dataStore.get("task");
+        allTasks.forEach( function(item) {
 
-        if (task) {
-            resultArea.innerHTML = `
-                <div>ID: ${task.id}</div>
-                <div>Name: ${task.name}</div>
+            const str = item.dateAdded;
+            const [month, day, year] = str.split(' ');
+            const date = month + " " +  day + " " + year;
+
+            const listObj = document.createElement("li");
+            listObj.innerHTML = `
+                <li class="list-group-item d-flex w-100 justify-content-between" id="delete-task">
+                    <h5 class="mb-1">${item.name}</h5>
+                    <small class="text-muted">${date}</small>
+                    <button type="submit" class="btn">Edit</button>
+                    <button type="click" class="btn" id="deleteButton">Delete</button>
+                </li>
             `
-        } else {
-            resultArea.innerHTML = "No Item";
-        }
+            document.getElementById("resultOfList").appendChild(listObj);
+        });
+
     }
 
     // Event Handlers --------------------------------------------------------------------------------------------------
@@ -61,8 +70,9 @@ class IndexPage extends BaseClass {
 
     async onCreate(event) {
         // Prevent the page from refreshing on form submit
+        console.log(event)
+        console.log("We hit the onCreate")
         event.preventDefault();
-        this.dataStore.set("task", null);
 
         let name = document.getElementById("taskInputName").value;
 
@@ -75,14 +85,23 @@ class IndexPage extends BaseClass {
             this.errorHandler("Error creating!  Try again...");
         }
     }
+
+    async onDelete(event) {
+        console.log("onDelete is hit")
+        event.preventDefault();
+        await this.client.deleteTask(taskId, this.errorHandler);
+        await this.renderExample();
+        this.showMessage(`Deleted task ${taskId}!`);
+    }
 }
 
 /**
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const examplePage = new IndexPage();
-    examplePage.mount();
+    const indexPage = new IndexPage();
+    console.log("We hit main")
+    indexPage.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);

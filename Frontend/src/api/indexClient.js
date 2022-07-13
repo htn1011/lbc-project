@@ -27,9 +27,21 @@ export default class IndexClient extends BaseClass {
         }
     }
 
+    async getAllTasks(errorCallback) {
+        try {
+            const response = await this.client.get(`/task`);
+            // console.log('getAllUsers');
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            this.handleError("getAllUsers", error, errorCallback)
+        }
+    }
+
     async createTask(name, errorCallback) {
         try {
-            const response = await this.client.post(`task`, {
+            const response = await this.client.post(`/task`, {
+                id: "id",
                 name: name,
                 dateAdded: new Date().toString()
             });
@@ -39,6 +51,13 @@ export default class IndexClient extends BaseClass {
         }
     }
 
+    async deleteTask(taskId, errorCallback) {
+        try {
+            await this.client.delete(`/task/${taskId}`);
+        } catch (error) {
+            this.handleError("deleteTask", error, errorCallback);
+        }
+    }
 
     handleError(method, error, errorCallback) {
         console.error(method + " failed - " + error);
