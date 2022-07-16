@@ -86,7 +86,7 @@ public class TaskController {
         taskResponse.setId(task.getId());
         taskResponse.setName(task.getName());
         taskResponse.setDateAdded(task.getDateAdded());
-        taskResponse.setCompleted(task.getCompleted());
+        taskResponse.setCompletionDate(task.getCompletionDate());
         taskResponse.setCompleted(task.getCompleted());
         return taskResponse;
     }
