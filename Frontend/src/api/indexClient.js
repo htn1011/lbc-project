@@ -30,7 +30,6 @@ export default class IndexClient extends BaseClass {
     async getAllTasks(errorCallback) {
         try {
             const response = await this.client.get(`/task`);
-            // console.log('getAllUsers');
             console.log(response.data);
             return response.data;
         } catch (error) {

@@ -2,6 +2,8 @@ import BaseClass from "../util/baseClass";
 import DataStore from "../util/DataStore";
 import IndexClient from "../api/indexClient";
 
+let taskId;
+
 /**
  * Logic needed for the view playlist page of the website.
  */
@@ -20,6 +22,7 @@ class IndexPage extends BaseClass {
         // document.getElementById('get-by-id-form').addEventListener('submit', this.onGet);
         console.log("In the mount")
         document.getElementById('create-task').addEventListener('submit', this.onCreate);
+     //   document.getElementById('deleteButton').addEventListener('click', this.onDelete);
         this.client = new IndexClient();
 
         this.dataStore.addChangeListener(this.renderExample)
@@ -35,16 +38,22 @@ class IndexPage extends BaseClass {
             const str = item.dateAdded;
             const [month, day, year] = str.split(' ');
             const date = month + " " +  day + " " + year;
+            let itemId = item.id;
 
             const listObj = document.createElement("li");
             listObj.innerHTML = `
                 <li class="list-group-item d-flex w-100 justify-content-between" id="delete-task">
                     <h5 class="mb-1">${item.name}</h5>
                     <small class="text-muted">${date}</small>
-                    <button type="submit" class="btn">Edit</button>
-                    <button type="click" class="btn" id="deleteButton">Delete</button>
+                    <button type="submit" class="btn" >Edit</button>
+                    <button type="button" class="btn deleteBtn" id="deleteButton-${item.id}">Delete</button>
                 </li>
             `
+
+            $('#deleteButton-'+ itemId).click(function() {
+                alert("Hello")
+            })
+
             document.getElementById("resultOfList").appendChild(listObj);
         });
 
@@ -93,6 +102,7 @@ class IndexPage extends BaseClass {
         await this.renderExample();
         this.showMessage(`Deleted task ${taskId}!`);
     }
+
 }
 
 /**
