@@ -90,11 +90,11 @@ public class TaskController {
         taskResponse.setCompleted(task.getCompleted());
         return taskResponse;
     }
-    @DeleteMapping("/{taskId}")
-    public ResponseEntity deleteTaskById(@PathVariable("taskId") String taskId) {
-        taskService.deleteTask(taskId);
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTaskById(@PathVariable("id") String id) {
+        taskService.deleteTask(id);
         return ResponseEntity.noContent().build();
-
     }
+
 }

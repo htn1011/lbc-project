@@ -3,28 +3,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-
 module.exports = {
   optimization: {
     usedExports: true
   },
   entry: {
-    examplePage: path.resolve(__dirname, 'src', 'pages', 'examplePage.js'),
+    indexPage: path.resolve(__dirname, 'src', 'pages', 'indexPage.js')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   devServer: {
-    https: true,
-    port: 8000,
+    https: false,
+    port: 8080,
     open: true,
-    openPage: 'https://localhost:8000',
-    // diableHostChecks, otherwise we get an error about headers and the page won't render
+    openPage: 'http://localhost:8080/index.html',
+    // disableHostChecks, otherwise we get an error about headers and the page won't render
     disableHostCheck: true,
     contentBase: 'packaging_additional_published_artifacts',
     // overlay shows a full-screen overlay in the browser when there are compiler errors or warnings
-    overlay: true
+    overlay: true,
+    proxy: [
+      {
+        context: [
+          '/task',
+        ],
+        target: 'http://localhost:5001'
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -32,14 +39,23 @@ module.exports = {
       filename: 'index.html',
       inject: false
     }),
+    new HtmlWebpackPlugin({
+      template: './src/task.html',
+      filename: 'task.html',
+      inject: false
+    }),
     new CopyPlugin({
       patterns: [
         {
           from: path.resolve('src/css'),
           to: path.resolve("dist/css")
+        },
+        {
+          from: path.resolve('src/images'),
+          to: path.resolve("dist/images")
         }
       ]
     }),
-    new CleanWebpackPlugin()   
+    new CleanWebpackPlugin()
   ]
 }
